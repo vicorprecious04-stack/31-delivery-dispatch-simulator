@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DispatchPro | Delivery Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-icon">D</div>
+        <div>
+          <h2>Dispatch<span>Pro</span></h2>
+          <small>DELIVERY OPERATIONS</small>
+        </div>
+      </div>
+
+      <div class="workspace">
+        <div class="workspace-icon">DP</div>
+        <div class="workspace-info">
+          <strong>Dispatch HQ</strong>
+          <small>Operations workspace</small>
+        </div>
+        <span class="workspace-arrow">⌄</span>
+      </div>
+
+      <p class="nav-label">WORKSPACE</p>
+
+      <nav class="navigation">
+        <button class="nav-item active" data-page="dashboard">
+          <span class="nav-icon">▦</span>
+          <span>Dashboard</span>
+        </button>
+
+        <button class="nav-item" data-page="deliveries">
+          <span class="nav-icon">▤</span>
+          <span>Deliveries</span>
+          <span class="nav-badge" id="deliveryNavCount">0</span>
+        </button>
+
+        <button class="nav-item" data-page="drivers">
+          <span class="nav-icon">♙</span>
+          <span>Drivers</span>
+        </button>
+
+        <button class="nav-item" data-page="analytics">
+          <span class="nav-icon">▥</span>
+          <span>Analytics</span>
+        </button>
+      </nav>
+
+      <p class="nav-label">PREFERENCES</p>
+
+      <nav class="navigation">
+        <button class="nav-item" data-page="settings">
+          <span class="nav-icon">⚙</span>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+
+      <div class="sidebar-status">
+        <div class="status-heading">
+          <span class="live-dot"></span>
+          <strong>Simulator Online</strong>
+        </div>
+        <p>Your dispatch system is running normally.</p>
+        <div class="status-line">
+          <span>System health</span>
+          <strong>98%</strong>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width: 98%"></div>
+        </div>
+      </div>
+
+      <div class="sidebar-profile">
+        <div class="profile-avatar">AD</div>
+        <div class="profile-info">
+          <strong>Admin User</strong>
+          <small>System Administrator</small>
+        </div>
+        <span class="profile-menu">•••</span>
+      </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button mobile-menu" id="menuButton" aria-label="Open navigation">
+            ☰
+          </button>
+
+          <div class="breadcrumb">
+            <span>Workspace</span>
+            <span class="breadcrumb-separator">/</span>
+            <strong id="breadcrumbTitle">Dashboard</strong>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="system-pill">
+            <span class="live-dot"></span>
+            <span>System operational</span>
+          </div>
+
+          <button class="icon-button theme-button" id="themeToggle"
+            title="Switch theme" aria-label="Switch theme">☾</button>
+
+          <button class="icon-button notification-button" id="notificationButton"
+            title="Notifications" aria-label="Notifications">
+            ♧
+            <span class="notification-dot"></span>
+          </button>
+
+          <div class="topbar-avatar">AD</div>
+        </div>
+      </header>
+
+      <main class="page-content" id="pageContent">
+        <!-- JavaScript renders the selected page here. -->
+      </main>
+
+      <footer class="footer">
+        <span>© <span id="currentYear"></span> DispatchPro Simulator</span>
+        <span>Built for smarter delivery operations <strong>●</strong></span>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- CREATE DELIVERY MODAL -->
+  <div class="modal-overlay" id="deliveryModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">DELIVERY MANAGEMENT</p>
+          <h2>Create new delivery</h2>
+          <p class="modal-description">
+            Enter the order details to create a delivery.
+          </p>
+        </div>
+        <button class="modal-close" id="closeModal" aria-label="Close modal">×</button>
+      </div>
+
+      <form id="deliveryForm">
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="customerName">Customer name *</label>
+            <input id="customerName" name="customerName"
+              type="text" placeholder="e.g. Amaka Johnson" required>
+          </div>
+
+          <div class="form-group">
+            <label for="customerPhone">Phone number *</label>
+            <input id="customerPhone" name="customerPhone"
+              type="tel" placeholder="e.g. 08012345678" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="deliveryAddress">Delivery address *</label>
+            <input id="deliveryAddress" name="deliveryAddress"
+              type="text" placeholder="Street, area, city" required>
+          </div>
+
+          <div class="form-group">
+            <label for="deliveryZone">Delivery zone *</label>
+            <select id="deliveryZone" name="deliveryZone" required>
+              <option value="">Select a zone</option>
+              <option value="GRA">GRA</option>
+              <option value="Woji">Woji</option>
+              <option value="Rumuola">Rumuola</option>
+              <option value="Trans Amadi">Trans Amadi</option>
+              <option value="Town">Town</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="deliveryFee">Delivery fee (₦) *</label>
+            <input id="deliveryFee" name="deliveryFee"
+              type="number" min="0" step="50" placeholder="1500" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="deliveryNotes">Delivery notes</label>
+            <textarea id="deliveryNotes" name="deliveryNotes"
+              rows="3" placeholder="Package description or special instructions"></textarea>
+          </div>
+
+        </div>
+
+        <div class="assignment-note">
+          <span>✦</span>
+          <div>
+            <strong>Smart driver assignment</strong>
+            <p>The simulator will assign an available driver using the closest simulated distance.</p>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="button button-secondary" id="cancelModal">
+            Cancel
+          </button>
+          <button type="submit" class="button button-primary">
+            Create delivery →
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
